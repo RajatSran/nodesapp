@@ -32,6 +32,23 @@ const removeNote = (title) => {
     }
 }
 
+const listnodes=()=>{
+    const notes = loadNotes()
+    console.log(chalk.inverse('your notes'))
+    notes.forEach((notes)=> console.log(notes.title))
+}
+
+const readnotes=(title)=>{
+    const notes=loadNotes()
+    findnote=notes.find((note)=>note.title===title)
+    if(findnote===undefined){
+        console.log(chalk.red.inverse('not found'))
+    }else{
+        console.log(chalk.inverse(title))
+        console.log(chalk.blue.inverse(title))
+    }
+}
+
 const saveNotes = (notes) => {
     const dataJSON = JSON.stringify(notes)
     fs.writeFileSync('notes.json', dataJSON)
@@ -47,8 +64,12 @@ const loadNotes = () => {
     }
 }
 
+
+
 module.exports = {
     getNotes: getNotes,
     addNote: addNote,
-    removeNote: removeNote
+    removeNote: removeNote,
+    listnodes:listnodes,
+    readnotes:readnotes
 }
